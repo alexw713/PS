@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Performer {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  stageName    String
+  realName     String?
+  bio          String   @db.Text
+  nationality  String?
+  birthYear    Int?
+  active       Boolean  @default(true)
+  imageUrl     String?
+  websiteUrl   String?
+  twitterUrl   String?
+  instagramUrl String?
+  onlyfansUrl  String?
+  tags         Tag[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Tag {
+  id         String      @id @default(cuid())
+  name       String      @unique
+  slug       String      @unique
+  performers Performer[]
+}

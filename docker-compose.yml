@@ -1,0 +1,35 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ps
+      POSTGRES_PASSWORD: pssecret
+      POSTGRES_DB: ps_directory
+    ports:
+      - "5432:5432"
+    volumes:
+      - ps_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ps -d ps_directory"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://ps:pssecret@db:5432/ps_directory?schema=public
+      ADMIN_USERNAME: admin
+      ADMIN_PASSWORD: changeme
+      SESSION_SECRET: ps-dev-session-secret-change-in-production-32chars
+      NEXT_PUBLIC_APP_NAME: PS Performer Directory
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  ps_pgdata:

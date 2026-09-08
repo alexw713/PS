@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+dist
+.env
+.env.local
+*.log
+.DS_Store
+coverage
+prisma/*.db
+prisma/*.db-journal
+_write.py
+_write2.py
+_write3.py
+_write4.py

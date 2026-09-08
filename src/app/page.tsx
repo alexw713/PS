@@ -59,6 +59,7 @@ export default async function HomePage({ searchParams }: Props) {
               stageName={p.stageName}
               nationality={p.nationality}
               bio={p.bio}
+              imageUrl={p.imageUrl}
               tags={p.tags}
             />
           ))}

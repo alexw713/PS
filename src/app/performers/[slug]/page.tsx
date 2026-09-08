@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
@@ -27,8 +28,21 @@ export default async function PerformerPage({ params }: Props) {
       </Link>
       <div className="rounded-2xl border border-ink-800 bg-ink-900/40 p-6 sm:p-8">
         <div className="mb-6 flex flex-wrap items-start gap-5">
-          <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 text-3xl font-bold text-white">
-            {performer.stageName.slice(0, 1)}
+          <div className="relative h-28 w-28 overflow-hidden rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 sm:h-32 sm:w-32">
+            {performer.imageUrl ? (
+              <Image
+                src={performer.imageUrl}
+                alt={performer.stageName}
+                fill
+                sizes="128px"
+                className="object-cover"
+                priority
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center text-3xl font-bold text-white">
+                {performer.stageName.slice(0, 1)}
+              </div>
+            )}
           </div>
           <div>
             <h1 className="text-3xl font-bold text-white">{performer.stageName}</h1>

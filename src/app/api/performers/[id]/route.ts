@@ -48,6 +48,7 @@ export async function PUT(req: Request, { params }: Ctx) {
         bio: String(body.bio),
         nationality: body.nationality ? String(body.nationality) : null,
         birthYear: body.birthYear != null && body.birthYear !== "" ? Number(body.birthYear) : null,
+        imageUrl: body.imageUrl || null,
         websiteUrl: body.websiteUrl || null,
         twitterUrl: body.twitterUrl || null,
         instagramUrl: body.instagramUrl || null,

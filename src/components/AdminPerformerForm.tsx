@@ -13,6 +13,7 @@ type Initial = {
   bio: string;
   nationality: string;
   birthYear: string;
+  imageUrl: string;
   websiteUrl: string;
   twitterUrl: string;
   instagramUrl: string;
@@ -28,6 +29,7 @@ const empty: Initial = {
   bio: "",
   nationality: "",
   birthYear: "",
+  imageUrl: "",
   websiteUrl: "",
   twitterUrl: "",
   instagramUrl: "",
@@ -64,6 +66,7 @@ export default function AdminPerformerForm({
       bio: form.bio,
       nationality: form.nationality || null,
       birthYear: form.birthYear ? Number(form.birthYear) : null,
+      imageUrl: form.imageUrl || null,
       websiteUrl: form.websiteUrl || null,
       twitterUrl: form.twitterUrl || null,
       instagramUrl: form.instagramUrl || null,
@@ -138,6 +141,11 @@ export default function AdminPerformerForm({
         </label>
       </div>
       <div className="sm:col-span-2">{field("Bio", "bio", { textarea: true })}</div>
+      <div className="sm:col-span-2">
+        {field("Image URL", "imageUrl", {
+          hint: "Local path e.g. /performers/slug.jpg or a remote https URL",
+        })}
+      </div>
       {field("Website URL", "websiteUrl")}
       {field("X / Twitter URL", "twitterUrl")}
       {field("Instagram URL", "instagramUrl")}

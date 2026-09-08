@@ -37,6 +37,7 @@ export default async function EditPerformerPage({ params }: Props) {
             bio: performer.bio,
             nationality: performer.nationality || "",
             birthYear: performer.birthYear?.toString() || "",
+            imageUrl: performer.imageUrl || "",
             websiteUrl: performer.websiteUrl || "",
             twitterUrl: performer.twitterUrl || "",
             instagramUrl: performer.instagramUrl || "",
